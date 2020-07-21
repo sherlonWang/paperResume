@@ -44,13 +44,27 @@
         </div>
     </div>
 </nav>
-<div id="links" class="row paper margin" style="margin-top: 80px;overflow: auto;height:580px">
+<div id="links" class="row paper margin" >
 </div>
 <div id="foot"></div>
 </body>
+<style type="text/css">
+    body{
+        overflow: hidden;
+    }
+    #links{
+        margin-top: 80px;
+        overflow: auto;
+    }
+</style>
 <script src="plugins/pictureViewer/js/jquery.min.js"></script>
 <script>
     $(function () {
+        var globalHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        console.log("globalHeight",globalHeight);
+        $("#links").css({
+            height:(globalHeight-160)+'px'
+        });
         // 添加头部和尾部信息
         $.ajax({
             url: "index.json",
@@ -72,7 +86,7 @@
             dataType: "json",
             success: function (data) {
                 // language=HTML
-                var linkTemplate = '<div style="cursor: pointer" class="sm-12 md-3 col">\n    <div id="{{title}}" popover-top="{{popover}}" class="card background-{{style}}" style="width: 100%;">\n<!--        <a style="text-decoration: none;" href="{{href}}" target="_blank">-->\n            <div class="card-body padding-none">\n\n                <h5 class="card-title">{{title}}</h5>\n                <h6 class="card-subtitle">{{subtitle}}</h6>\n           \n                <!--            <a class="btn-mini paper-btn" href="{{href}}" target="_blank">{{name}}</a>-->\n            </div>\n<!--        </a>-->\n    </div>\n</div>';
+                var linkTemplate = '<div class="sm-12 md-3 col">\n    <div id="{{title}}" popover-top="{{popover}}" class="card background-{{style}}" style="width: 100%;cursor: pointer">\n<!--        <a style="text-decoration: none;" href="{{href}}" target="_blank">-->\n            <div class="card-body padding-none">\n\n                <h5 class="card-title">{{title}}</h5>\n                <h6 class="card-subtitle">{{subtitle}}</h6>\n           \n                <!--            <a class="btn-mini paper-btn" href="{{href}}" target="_blank">{{name}}</a>-->\n            </div>\n<!--        </a>-->\n    </div>\n</div>';
                 var links = data.links;
                 var styles = ["primary","secondary","success","warning","danger","muted"];
                 links.forEach(function (link) {

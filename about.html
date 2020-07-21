@@ -32,7 +32,7 @@
         </div>
     </div>
 </nav>
-<div style="margin-top: 40px" class="row site">
+<div style="" class="row site about">
     <div class="sm-12 md-3 col">
         <div id="intro" class="paper">
         </div>
@@ -43,9 +43,22 @@
     </div>
 </div>
 </body>
+<style type="text/css">
+    body{
+        overflow: hidden;
+    }
+    .about{
+        margin-top: 40px;
+    }
+</style>
 <script type="application/javascript" src="plugins/pictureViewer/js/jquery.min.js"></script>
 <script>
     $(function () {
+        var globalHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        console.log("globalHeight",globalHeight);
+        $("#brief").css({
+            height:(globalHeight-180)+'px'
+        });
         // 添加头部和尾部信息
         $.ajax({
             url: "index.json",

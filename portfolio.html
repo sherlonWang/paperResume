@@ -37,7 +37,7 @@
     </div>
 </nav>
 <!-- portfolio -->
-<div style="margin-top: 80px" class="paper margin margin-top">
+<div  style="margin-top: 80px" class="paper margin margin-top portfolios">
     <div id="portfolios" class="row flex-spaces tabs margin-none">
     </div>
 </div>
@@ -45,11 +45,23 @@
 <div id="foot">
 </div>
 </body>
+<style type="text/css">
+    body{
+        overflow: hidden;
+    }
+    .content{
+        overflow: auto;
+        height:450px;
+    }
+</style>
 <script src="plugins/pictureViewer/js/jquery.min.js"></script>
 <script src="plugins/pictureViewer/js/jquery.mousewheel.min.js"></script>
 <script src="plugins/pictureViewer/js/pictureViewer.js"></script>
 <script>
     $(function () {
+        var globalHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        console.log("globalHeight",globalHeight);
+
         // 添加头部和尾部信息
         $.ajax({
             url: "index.json",
@@ -73,7 +85,7 @@
                 // language=HTML
                 var tabTemplate = '<input id="{{tab}}" type="radio" name="tabs" {{checked}}>\n<label for="{{tab}}">{{name}}</label>';
                 // language=HTML
-                var contentTemplate = '<div style="overflow: auto;height:450px" class="content" id="{{content}}">\n    <div id="{{image}}" class="row">\n        \n    </div>\n</div>';
+                var contentTemplate = '<div class="content" id="{{content}}">\n    <div id="{{image}}" class="row">\n        \n    </div>\n</div>';
                 // language=HTML
                 var imageTemplate = '<div class="sm-12 md-2 col">\n    <div class="card cover">\n        <img src="{{image}}" alt="Card example image">\n    </div>\n</div>';
                 var portfolios = data.portfolios;
@@ -95,6 +107,13 @@
                         $("#image"+(i+1)).append(imageTemplate.replace("{{image}}", image));
                     });
                 }
+                $(".portfolios").css({
+                    height:(globalHeight-160)+'px'
+                });
+
+                $(".content").css({
+                    height:(globalHeight-300)+'px'
+                });
 
                 // 等页面元素加载完毕后，注册图片预览事件
                 $('.cover img').on('click', function () {

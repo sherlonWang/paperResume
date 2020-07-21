@@ -36,17 +36,33 @@
     </div>
 </nav>
 <!-- projects -->
-<div style="margin-top: 80px;overflow: auto;height: 580px" class="paper margin">
-    <div id="projects" class="row" style="">
+<div class="paper margin projects">
+    <div id="projects" class="row" >
     </div>
 </div>
 <div id="foot">
 
 </div>
 </body>
+<style type="text/css">
+    body{
+        overflow: hidden;
+    }
+    .projects{
+        margin-top: 80px;
+        overflow: auto;
+        /*height: 580px;*/
+
+    }
+</style>
 <script type="application/javascript" src="plugins/pictureViewer/js/jquery.min.js"></script>
 <script>
     $(function () {
+        var globalHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        console.log("globalHeight",globalHeight);
+        $(".projects").css({
+            height:(globalHeight-160)+'px'
+        });
         // 添加头部和尾部信息
         $.ajax({
             url: "index.json",
