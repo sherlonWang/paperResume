@@ -1,0 +1,47 @@
+{
+  "avatar": "images/sherlon.jpg",
+  "items": [
+    {
+      "name": "Name",
+      "value": "sherlonWang",
+      "href": ""
+    },
+    {
+      "name": "Age",
+      "value": "Young",
+      "href": ""
+    },
+    {
+      "name": "Email",
+      "value": "longsherlon@gmail.com",
+      "href": "mailto://longsherlon@gmail.com"
+    }
+  ],
+  "socials": [
+    {
+      "name": "博客",
+      "link": "https://www.sherlonwang.com"
+    },
+    {
+      "name": "GitHub",
+      "link": "https://github.com/sherlonWang"
+    },
+    {
+      "name": "CSDN",
+      "link": "https://blog.csdn.net/weixin_38483589"
+    },
+    {
+      "name": "微博",
+      "link": "https://weibo.com/6247884327/profile?topnav=1&wvr=6"
+    },
+    {
+      "name": "B站",
+      "link": "https://space.bilibili.com/398079956"
+    }
+  ],
+  "brief": {
+    "title": "About Me",
+    "meta": "Written by a weird guy named sherlonWang",
+    "content": " 一个喜欢折腾、懂点技术的互联网人、独立开发者、持续学习者。\n 喜欢开源，熟悉全栈开发模式，致力于用技术提高工作效率。"
+  }
+}

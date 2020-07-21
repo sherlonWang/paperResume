@@ -1554,7 +1554,7 @@ button.btn-muted:hover:active, .paper-btn.btn-muted:hover:active, [type='button'
 }
 
 .card .card-body .card-subtitle, .card .card-body h5 {
-    color: #0071de;
+    color: grey;
     margin-bottom: 0.5rem;
     margin-top: 0
 }

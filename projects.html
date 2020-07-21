@@ -14,8 +14,7 @@
 <body>
 <!-- navigation -->
 <nav class=" fixed split-nav">
-    <div class="nav-brand">
-        <h3><a href="about.html"><i class="fa fa-cube"></i> Sherlon</a></h3>
+    <div id="brand" class="nav-brand">
     </div>
     <div class="collapsible">
         <input id="collapsible1" type="checkbox" name="collapsible1">
@@ -38,56 +37,53 @@
 </nav>
 <!-- projects -->
 <div style="margin-top: 80px;overflow: auto;height: 580px" class="paper margin">
-    <div class="row" style="">
-        <div class="sm-12 md-4 col">
-            <div class="card" style="width: 100%;">
-                <div class="progress">
-                    <div class="bar warning w-80">focus</div>
-                </div>
-                <img src="images/index.png" alt="Card example image">
-
-                <div class="card-body">
-                    <h4 class="card-title">My awesome Paper card!</h4>
-                    <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                    <button class="btn-mini">First link</button>
-                    <button class="btn-mini">Second link</button>
-                </div>
-            </div>
-        </div>
-        <div class="sm-12 md-4 col">
-            <div class="card" style="width: 100%;">
-                <div class="progress">
-                    <div class="bar striped danger w-100">70%</div>
-                </div>
-                <img src="images/index.png" alt="Card example image">
-
-                <div class="card-body">
-                    <h4 class="card-title">My awesome Paper card!</h4>
-                    <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                    <button class="btn-mini">First link</button>
-                    <button class="btn-mini">Second link</button>
-                </div>
-            </div>
-        </div>
-        <div class="sm-12 md-4 col">
-            <div class="card" style="width: 100%;">
-                <div class="progress">
-                    <div class="bar secondary w-30">30%</div>
-                </div>
-                <img src="images/index.png" alt="Card example image">
-
-                <div class="card-body">
-                    <h4 class="card-title">My awesome Paper card!</h4>
-                    <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                    <button class="btn-mini">First link</button>
-                    <button class="btn-mini">Second link</button>
-                </div>
-            </div>
-        </div>
-
+    <div id="projects" class="row" style="">
     </div>
 </div>
-<p style="text-align: center">sherlon.wang © 2019 | Designed by <a target="_blank" href="https://www.getpapercss.com/">Papper.css</a>
-</p>
+<div id="foot">
+
+</div>
 </body>
+<script type="application/javascript" src="plugins/pictureViewer/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        // 添加头部和尾部信息
+        $.ajax({
+            url: "index.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // language=HTML
+                var brandTemplate = '<h3><a href="about.html"><i class="fa fa-cube"></i> {{head}}</a></h3>';
+                var footTemplate = '<p style="text-align: center">{{foot}}</a></p>';
+                $("#brand").append(brandTemplate.replace("{{head}}",data.head));
+                $("#foot").append(footTemplate.replace("{{foot}}",data.foot));
+            }
+        });
+        $.ajax({
+            url: "projects.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // 模板
+                // language=HTML
+                var projectTemplate = '<div class="sm-12 md-4 col">\n    <div class="card" style="width: 100%;">\n        <div class="progress">\n            <div class="bar {{color}} w-{{percent}}">{{state}}</div>\n        </div>\n        <img src="{{img}}" alt="Card example image">\n\n        <div class="card-body">\n            <h4 class="card-title">{{title}}</h4>\n            <h5 class="card-subtitle">{{subtitle}}</h5>\n            <a class="btn-mini paper-btn" href="{{href1}}" target="_blank">{{name1}}</a>\n            <a class="btn-mini paper-btn" href="{{href2}}" target="_blank">{{name2}}</a>\n        </div>\n    </div>\n</div>';
+                var projects = data.projects;
+                projects.forEach(function (project) {
+                    $("#projects").append(projectTemplate
+                            .replace("{{title}}",project.title)
+                            .replace("{{subtitle}}",project.subtitle)
+                            .replace("{{img}}",project.img)
+                            .replace("{{name1}}",project.name1)
+                            .replace("{{href1}}",project.href1)
+                            .replace("{{name2}}",project.name2)
+                            .replace("{{href2}}",project.href2)
+                            .replace("{{color}}",project.color)
+                            .replace("{{percent}}",project.percent)
+                            .replace("{{state}}",project.state));
+                });
+            }
+        });
+    });
+</script>
 </html>

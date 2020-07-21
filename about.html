@@ -9,13 +9,9 @@
     <title>Sherlon: About Me</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/icon.png"/>
 </head>
-<style>
-
-</style>
 <body>
 <nav class="fixed split-nav">
-    <div class="nav-brand">
-        <h3><a href="about.html" ><i class="fa fa-cube"></i> Sherlon</a></h3>
+    <div id="brand" class="nav-brand">
     </div>
     <div class="collapsible">
         <input id="collapsible1" type="checkbox" name="collapsible1">
@@ -38,42 +34,62 @@
 </nav>
 <div style="margin-top: 40px" class="row site">
     <div class="sm-12 md-3 col">
-        <div class="paper">
-            <img src="images/sherlon.jpg">
-            <p class="intro">
-                <span class="name">Name:</span><a target="_blank" href="https://www.sherlon.wang">sherlonWang</a>
-            </p>
-            <p class="intro">
-                <span class="name">Age:</span><span>young</span>
-            </p>
-            <!--<p class="intro">-->
-                <!--<span class="name">Phone:</span><a href="tell://15061460796">15061460796</a>-->
-            <!--</p>-->
-            <p class="intro">
-                <span class="name">Email:</span><a href="mailto://longsherlon@gmail.com">longsherlon@gmail.com</a>
-            </p>
-            <!--<p>-->
-            <!--<span class="label">Address:</span><span>Jiangsu Wuxi</span>-->
-            <!--</p>-->
-            <!--<button class="btn-mini">-->
-            <a class="btn-mini paper-btn" target="_blank" href="https://github.com/sherlonWang">Github</a>
-        <!--</button>-->
-            <a class="btn-mini paper-btn" target="_blank" href="https://blog.csdn.net/weixin_38483589">CSDN</a>
-            <a class="btn-mini paper-btn" target="_blank" href="https://weibo.com/6247884327/profile?topnav=1&wvr=6">微博</a>
-            <a class="btn-mini paper-btn" target="_blank" href="https://www.zhihu.com/people/sherlonwang/activities">知乎</a>
+        <div id="intro" class="paper">
         </div>
     </div>
-    <div class="sm-12 md-9 col text-center">
-        <div class="paper">
-            <article class="article">
-                <h1 class="article-title"><a href="#">About Me</a></h1>
-                <p class="article-meta">Written by a weird guy named<a target="_blank" href="https://www.sherlon.wang"> sherlonWang <span class="badge danger">1</span></a></p>
-                <p class=""> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti iure totam nam debitis aliquid impedit, et quas omnis aspernatur optio molestias ex laborum quia. Ducimus culpa tempore, veritatis officia delectus dolore dignissimos reprehenderit vero, sunt odit placeat est non molestiae ipsa nam velit in iusto hic quasi similique facere. Maxime?
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti iure totam nam debitis aliquid impedit, et quas omnis aspernatur optio molestias ex laborum quia. Ducimus culpa tempore, veritatis officia delectus dolore dignissimos reprehenderit vero, sunt odit placeat est non molestiae ipsa nam velit in iusto hic quasi similique facere. Maxime?</p>
-            </article>
+    <div id="foot" class="sm-12 md-9 col text-center">
+        <div id="brief" class="paper">
         </div>
-        <p style="margin-top: 30px;">sherlon.wang © 2019 | Designed by <a target="_blank" href="https://www.getpapercss.com/">Papper.css</a></p>
     </div>
 </div>
 </body>
+<script type="application/javascript" src="plugins/pictureViewer/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        // 添加头部和尾部信息
+        $.ajax({
+            url: "index.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // language=HTML
+                var brandTemplate = '<h3><a href="about.html"><i class="fa fa-cube"></i> {{head}}</a></h3>';
+                var footTemplate = '<p style="margin-top: 30px;">{{foot}}</a></p>';
+                $("#brand").append(brandTemplate.replace("{{head}}",data.head));
+                $("#foot").append(footTemplate.replace("{{foot}}",data.foot));
+            }
+        });
+
+        $.ajax({
+            url: "about.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // 模板
+                // language=HTML
+                var avatarTemplate = '<img src="{{avatar}}">';
+                var itemTemplate = '<p class="intro">\n    <span class="name">{{name}}：</span><a target="_blank" href="{{href}}">{{value}}</a>\n</p>';
+                // language=HTML
+                var socialTemplate = '<a class="btn-mini paper-btn" target="_blank" href="{{link}}">{{name}}</a> ';
+                var briefTemplate = '<article class="article">\n    <h1 class="article-title"><a href="#">{{title}}</a></h1>\n    <p class="article-meta">{{meta}}</p>\n    <p>{{content}}</p>\n</article>';
+                var intro = $("#intro");
+                // 添加图像
+                intro.append(avatarTemplate.replace("{{avatar}}",data.avatar));
+                // 添加个人信息
+                var items = data.items;
+                items.forEach(function (item) {
+                    intro.append(itemTemplate.replace("{{name}}",item.name).replace("{{value}}",item.value).replace("{{href}}",item.href));
+                });
+                // 添加社交媒体
+                var socials = data.socials;
+                socials.forEach(function (social) {
+                    intro.append(socialTemplate.replace("{{name}}",social.name).replace("{{link}}",social.link));
+                });
+                // 添加简介
+                $("#brief").append(briefTemplate.replace("{{title}}",data.brief.title).replace("{{meta}}",data.brief.meta).replace("{{content}}",data.brief.content));
+                console.log(data);
+            }
+        });
+    });
+</script>
 </html>

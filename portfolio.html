@@ -10,11 +10,12 @@
     <title>Sherlon: Portfolio</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/icon.png"/>
 </head>
+<style>
+</style>
 <body>
 <!-- navigation -->
 <nav class="fixed split-nav">
-    <div class="nav-brand">
-        <h3><a href="about.html"><i class="fa fa-cube"></i> Sherlon</a></h3>
+    <div id="brand" class="nav-brand">
     </div>
     <div class="collapsible">
         <input id="collapsible1" type="checkbox" name="collapsible1">
@@ -36,117 +37,90 @@
     </div>
 </nav>
 <!-- portfolio -->
-<!--<div style="margin-top: 90px" class="paper margin-none padding-none">-->
-    <!--<div class="row text-center margin-none">-->
-        <!--<div class="col-3 col">col-4 col</div>-->
-        <!--<div class="col-3 col">col-4 col</div>-->
-        <!--<div class="col-3 col">col-4 col</div>-->
-        <!--<div class="col-3 col">col-4 col</div>-->
-    <!--</div>-->
-<!--</div>-->
 <div style="margin-top: 80px" class="paper margin margin-top">
-    <div class="row flex-spaces tabs margin-none">
-        <input id="tab1" type="radio" name="tabs" checked>
-        <label for="tab1">Tab 1</label>
-
-        <input id="tab2" type="radio" name="tabs">
-        <label for="tab2">Tab 2</label>
-
-        <input id="tab3" type="radio" name="tabs">
-        <label for="tab3">Tab 3</label>
-
-        <div style="overflow: auto;height:430px" class="content" id="content1">
-            <div class="row">
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/index.png" alt="Card example image">
-                    </div>
-                </div>
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/1.png" alt="Card example image">
-                    </div>
-                </div>
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/2.png" alt="Card example image">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="overflow: auto;height:450px" class="content" id="content2">
-            <div class="row">
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/0.png" alt="Card example image">
-                    </div>
-                </div>
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/1.png" alt="Card example image">
-                    </div>
-                </div>
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/2.png" alt="Card example image">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="overflow: auto;height:450px" class="content" id="content3">
-            <div class="row">
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/index.png" alt="Card example image">
-                    </div>
-                </div>
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/1.png" alt="Card example image">
-                    </div>
-                </div>
-                <div class="sm-12 md-4 col">
-                    <div class="card cover" style="width: 100%;">
-                        <img src="images/2.png" alt="Card example image">
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="portfolios" class="row flex-spaces tabs margin-none">
     </div>
 </div>
-<p style="text-align: center">sherlon.wang © 2019 | Designed by <a target="_blank" href="https://www.getpapercss.com/">Papper.css</a></p>
+<!-- foot -->
+<div id="foot">
+</div>
+</body>
 <script src="plugins/pictureViewer/js/jquery.min.js"></script>
 <script src="plugins/pictureViewer/js/jquery.mousewheel.min.js"></script>
 <script src="plugins/pictureViewer/js/pictureViewer.js"></script>
 <script>
     $(function () {
-        $('.cover img').on('click', function () {
-            var width = document.body.clientWidth;
-            var height = document.body.clientHeight;
-//            alert(width+":"+height);
-            var me = this;
-            var index = 0;
-            var m = 0;
-            var images = $(this).parent().parent().parent().find('img');
-            var imagesArr = new Array();
-            $.each(images, function (i, image) {
-                index++;
-                if (me.src == image.src) {
-                    m = index;
-                }
-                imagesArr.push(image.src);
-            });
-            $.pictureViewer({
-                minLength:width>height?height:width,
-                images: imagesArr, //需要查看的图片，数据类型为数组
-                initImageIndex: m, //初始查看第几张图片，默认1
-                scrollSwitch: true //是否使用鼠标滚轮切换图片，默认false
-            });
+        // 添加头部和尾部信息
+        $.ajax({
+            url: "index.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // language=HTML
+                var brandTemplate = '<h3><a href="about.html"><i class="fa fa-cube"></i> {{head}}</a></h3>';
+                var footTemplate = '<p style="text-align: center">{{foot}}</a></p>';
+                $("#brand").append(brandTemplate.replace("{{head}}", data.head));
+                $("#foot").append(footTemplate.replace("{{foot}}", data.foot));
+            }
         });
-        $(".someclass:not(.content)").click(function(){
-            alert(11);
+        // 添加portfolios
+        $.ajax({
+            url: "portfolio.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // language=HTML
+                // language=HTML
+                var tabTemplate = '<input id="{{tab}}" type="radio" name="tabs" {{checked}}>\n<label for="{{tab}}">{{name}}</label>';
+                // language=HTML
+                var contentTemplate = '<div style="overflow: auto;height:450px" class="content" id="{{content}}">\n    <div id="{{image}}" class="row">\n        \n    </div>\n</div>';
+                // language=HTML
+                var imageTemplate = '<div class="sm-12 md-2 col">\n    <div class="card cover">\n        <img src="{{image}}" alt="Card example image">\n    </div>\n</div>';
+                var portfolios = data.portfolios;
+                // 添加分类labels
+                for (var i = 0; i < portfolios.length; i++) {
+                    var portfolio = portfolios[i];
+                    $("#portfolios").append(tabTemplate.replace("{{name}}", portfolio.name).replace(/{{tab}}/g, "tab" + (i + 1)).replace("{{checked}}", portfolio.checked));
+                }
+                // 添加内容区域
+                for (var i = 0; i < portfolios.length; i++) {
+                    var portfolio = portfolios[i];
+                    $("#portfolios").append(contentTemplate.replace("{{content}}", "content" + (i + 1)).replace("{{image}}", "image" + (i + 1)));
+                }
+                // 添加内容区域的图片
+                for (var i = 0; i < portfolios.length; i++) {
+                    var portfolio = portfolios[i];
+                    var images = portfolio.images;
+                    images.forEach(function (image) {
+                        $("#image"+(i+1)).append(imageTemplate.replace("{{image}}", image));
+                    });
+                }
+
+                // 等页面元素加载完毕后，注册图片预览事件
+                $('.cover img').on('click', function () {
+                    var width = document.body.clientWidth;
+                    var height = document.body.clientHeight;
+                    var me = this;
+                    var index = 0;
+                    var m = 0;
+                    var images = $(this).parent().parent().parent().find('img');
+                    var imagesArr = new Array();
+                    $.each(images, function (i, image) {
+                        index++;
+                        if (me.src == image.src) {
+                            m = index;
+                        }
+                        imagesArr.push(image.src);
+                    });
+                    $.pictureViewer({
+                        minLength: width > height ? height : width,
+                        images: imagesArr, //需要查看的图片，数据类型为数组
+                        initImageIndex: m, //初始查看第几张图片，默认1
+                        scrollSwitch: true //是否使用鼠标滚轮切换图片，默认false
+                    });
+                });
+            }
         });
     });
 </script>
-</body>
 </html>

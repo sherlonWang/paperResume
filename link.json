@@ -1,0 +1,22 @@
+{
+  "links": [
+    {
+      "title": "廖雪峰的官方网站",
+      "subtitle": "研究互联网产品和技术，提供原创中文精品教程",
+      "name": "访问网站",
+      "href": "https://www.liaoxuefeng.com/"
+    },
+    {
+      "title": "阮一峰科技周刊",
+      "subtitle": "记录每周值得分享的科技内容",
+      "name": "查看",
+      "href": "http://www.ruanyifeng.com/blog/weekly/"
+    },
+    {
+      "title": "酷壳-CoolShell",
+      "subtitle": "享受编程和技术所带来的快乐",
+      "name": "访问",
+      "href": "https://coolshell.cn/"
+    }
+  ]
+}

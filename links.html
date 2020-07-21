@@ -9,11 +9,21 @@
     <title>Sherlon: Links</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/icon.png"/>
 </head>
+<style>
+    .card-title{
+        font-size: 22px;
+    }
+    .card .card-body .card-subtitle, .card .card-body h5 {
+        color: #333;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+    }
+</style>
 <body>
 <!-- navigation -->
 <nav class=" fixed split-nav">
-    <div class="nav-brand">
-        <h3><a href="about.html" ><i class="fa fa-cube"></i> Sherlon</a></h3>
+    <!-- head -->
+    <div id="brand" class="nav-brand">
     </div>
     <div class="collapsible">
         <input id="collapsible1" type="checkbox" name="collapsible1">
@@ -34,88 +44,50 @@
         </div>
     </div>
 </nav>
-<div class="row paper margin" style="margin-top: 80px;overflow: auto;height:580px">
-    <div class="sm-12 md-3 col">
-        <div class="card background-warning" style="width: 100%;">
-            <div class="card-body padding-none">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
-    <div class="sm-12 md-3 col">
-        <div class="card background-muted" style="width: 100%;">
-            <div class="card-body padding-none">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
-    <div class="sm-12 md-3 col">
-        <div class="card background-primary" style="width: 100%;">
-            <div class="card-body">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
-    <div class="sm-12 md-3 col">
-        <div class="card background-danger" style="width: 100%;">
-            <div class="card-body">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
-    <div class="sm-12 md-3 col">
-        <div class="card background-danger" style="width: 100%;">
-            <div class="card-body">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
-    <div class="sm-12 md-3 col">
-        <div class="card background-secondary" style="width: 100%;">
-            <div class="card-body">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
-    <div class="sm-12 md-3 col">
-        <div class="card background-warning" style="width: 100%;">
-            <div class="card-body">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
-    <div class="sm-12 md-3 col">
-        <div class="card background-success" style="width: 100%;">
-            <div class="card-body">
-                <h4 class="card-title">My awesome Paper card!</h4>
-                <h5 class="card-subtitle">Nice looking subtitle.</h5>
-                <button class="btn-mini" >First link</button>
-                <button class="btn-mini" >Second link</button>
-            </div>
-        </div>
-    </div>
+<div id="links" class="row paper margin" style="margin-top: 80px;overflow: auto;height:580px">
 </div>
-<p style="text-align: center">sherlon.wang © 2019 | Designed by <a target="_blank" href="https://www.getpapercss.com/">Papper.css</a></p>
+<div id="foot"></div>
 </body>
+<script src="plugins/pictureViewer/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        // 添加头部和尾部信息
+        $.ajax({
+            url: "index.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // language=HTML
+                var brandTemplate = '<h3><a href="about.html"><i class="fa fa-cube"></i> {{head}}</a></h3>';
+                var footTemplate = '<p style="text-align: center">{{foot}}</a></p>';
+                $("#brand").append(brandTemplate.replace("{{head}}", data.head));
+                $("#foot").append(footTemplate.replace("{{foot}}", data.foot));
+            }
+        });
+
+        // 添加友情链接
+        $.ajax({
+            url: "link.json",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // language=HTML
+                var linkTemplate = '<div style="cursor: pointer" class="sm-12 md-3 col">\n    <div id="{{title}}" popover-top="{{popover}}" class="card background-{{style}}" style="width: 100%;">\n<!--        <a style="text-decoration: none;" href="{{href}}" target="_blank">-->\n            <div class="card-body padding-none">\n\n                <h5 class="card-title">{{title}}</h5>\n                <h6 class="card-subtitle">{{subtitle}}</h6>\n           \n                <!--            <a class="btn-mini paper-btn" href="{{href}}" target="_blank">{{name}}</a>-->\n            </div>\n<!--        </a>-->\n    </div>\n</div>';
+                var links = data.links;
+                var styles = ["primary","secondary","success","warning","danger","muted"];
+                links.forEach(function (link) {
+                    var index = Math.floor(Math.random() * 6);
+                    $("#links").append(linkTemplate.replace("{{popover}}",link.subtitle).replace(/{{title}}/g,link.title).replace("{{subtitle}}",link.subtitle.length>18?link.subtitle.substring(0,15)+"...":link.subtitle).replace("{{name}}",link.name).replace("{{href}}",link.href).replace("{{style}}",styles[index]));
+                    setTimeout(function () {
+                        $("#"+link.title).on('click',function () {
+                            window.open(link.href);
+                        });
+                    },200);
+
+                });
+
+            }
+        });
+    });
+</script>
 </html>
