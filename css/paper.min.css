@@ -1804,7 +1804,8 @@ fieldset.form-group {
 
 [popover-top]:hover::after, [popover-right]:hover::after, [popover-bottom]:hover::after, [popover-left]:hover::after {
     opacity: 1;
-    transition: opacity 0.2s ease-out
+    transition: opacity 0.2s ease-out;
+    width: 100%;
 }
 
 [popover-top]::after, [popover-right]::after, [popover-bottom]::after, [popover-left]::after {
@@ -1819,6 +1820,7 @@ fieldset.form-group {
     font-size: 0.7em;
     left: 50%;
     min-width: 80px;
+    width: 100%;
     opacity: 0;
     padding: 4px 2px;
     position: absolute;
@@ -1832,6 +1834,7 @@ fieldset.form-group {
     left: 0;
     margin-left: -12px;
     top: 50%;
+    width: 100%;
     -webkit-transform: translateY(-50%) rotate(-90deg);
     transform: translateY(-50%) rotate(-90deg)
 }
@@ -1841,6 +1844,7 @@ fieldset.form-group {
     left: 0;
     margin-left: -8px;
     top: 50%;
+    width: 100%;
     -webkit-transform: translateX(-100%) translateY(-50%);
     transform: translateX(-100%) translateY(-50%)
 }
@@ -1849,6 +1853,7 @@ fieldset.form-group {
     left: 100%;
     margin-left: 1px;
     top: 50%;
+    width: 100%;
     -webkit-transform: translatey(-50%) rotate(90deg);
     transform: translatey(-50%) rotate(90deg)
 }
@@ -1858,22 +1863,26 @@ fieldset.form-group {
     left: 100%;
     margin-left: 8px;
     top: 50%;
+    width: 100%;
     -webkit-transform: translateX(0%) translateY(-50%);
     transform: translateX(0%) translateY(-50%)
 }
 
 [popover-top]::before {
-    left: 50%
+    left: 50%;
+    width: 100%;
 }
 
 [popover-top]::after {
     content: attr(popover-top);
-    left: 50%
+    left: 50%;
+    width: 100%;
 }
 
 [popover-bottom]::before {
     margin-top: 8px;
     top: 100%;
+    width: 100%;
     -webkit-transform: translateX(-50%) translatey(-100%) rotate(-180deg);
     transform: translateX(-50%) translatey(-100%) rotate(-180deg)
 }
@@ -1882,6 +1891,7 @@ fieldset.form-group {
     content: attr(popover-bottom);
     margin-top: 8px;
     top: 100%;
+    width: 100%;
     -webkit-transform: translateX(-50%) translateY(0%);
     transform: translateX(-50%) translateY(0%)
 }

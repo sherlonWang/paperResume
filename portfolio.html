@@ -32,6 +32,7 @@
                 <li><a href="projects.html">Projects</a></li>
                 <li><a class="background-secondary a-selected" href="portfolio.html">Portfolio</a></li>
                 <li><a href="links.html">Links</a></li>
+                <li><a href="https://imxiaolong.com" target="_blank">Blog</a></li>
             </ul>
         </div>
     </div>
@@ -87,7 +88,7 @@
                 // language=HTML
                 var contentTemplate = '<div class="content" id="{{content}}">\n    <div id="{{image}}" class="row">\n        \n    </div>\n</div>';
                 // language=HTML
-                var imageTemplate = '<div class="sm-12 md-2 col">\n    <div class="card cover">\n        <img src="{{image}}" alt="Card example image">\n    </div>\n</div>';
+                var imageTemplate = '<div class="sm-12 md-3 col">\n    <div popover-bottom="{{desc}}" class="card cover">\n        <img style="cursor: pointer" src="{{image}}" alt="Card example image">\n    </div>\n</div>';
                 var portfolios = data.portfolios;
                 // 添加分类labels
                 for (var i = 0; i < portfolios.length; i++) {
@@ -104,7 +105,7 @@
                     var portfolio = portfolios[i];
                     var images = portfolio.images;
                     images.forEach(function (image) {
-                        $("#image"+(i+1)).append(imageTemplate.replace("{{image}}", image));
+                        $("#image"+(i+1)).append(imageTemplate.replace("{{image}}", image.src).replace("{{desc}}",image.desc));
                     });
                 }
                 $(".portfolios").css({

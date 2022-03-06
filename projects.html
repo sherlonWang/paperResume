@@ -31,6 +31,7 @@
                 <li><a class="background-secondary a-selected" href="projects.html">Projects</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="links.html">Links</a></li>
+                <li><a href="https://imxiaolong.com" target="_blank">Blog</a></li>
             </ul>
         </div>
     </div>
@@ -83,7 +84,7 @@
             success: function (data) {
                 // 模板
                 // language=HTML
-                var projectTemplate = '<div class="sm-12 md-4 col">\n    <div class="card" style="width: 100%;">\n        <div class="progress">\n            <div class="bar {{color}} w-{{percent}}">{{state}}</div>\n        </div>\n        <img src="{{img}}" alt="Card example image">\n\n        <div class="card-body">\n            <h4 class="card-title">{{title}}</h4>\n            <h5 class="card-subtitle">{{subtitle}}</h5>\n            <a class="btn-mini paper-btn" href="{{href1}}" target="_blank">{{name1}}</a>\n            <a class="btn-mini paper-btn" href="{{href2}}" target="_blank">{{name2}}</a>\n        </div>\n    </div>\n</div>';
+                var projectTemplate = '<div class="sm-12 md-4 col">\n    <div class="card" style="width: 100%;">\n        <div class="progress">\n            <div class="bar striped {{color}} w-{{percent}}">{{state}}</div>\n        </div>\n        <img src="{{img}}" alt="Card example image">\n\n        <div class="card-body">\n            <h4 class="card-title">{{title}}</h4>\n            <h5 class="card-subtitle">{{subtitle}}</h5>\n            <a class="btn-mini paper-btn" href="{{href1}}" target="_blank">{{name1}}</a>\n            <a class="btn-mini paper-btn" href="{{href2}}" target="_blank">{{name2}}</a>\n        </div>\n    </div>\n</div>';
                 var projects = data.projects;
                 projects.forEach(function (project) {
                     $("#projects").append(projectTemplate

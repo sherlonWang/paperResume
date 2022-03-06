@@ -3,7 +3,7 @@
   "items": [
     {
       "name": "Name",
-      "value": "sherlonWang",
+      "value": "xiaolong",
       "href": ""
     },
     {
@@ -20,7 +20,7 @@
   "socials": [
     {
       "name": "博客",
-      "link": "https://www.sherlonwang.com"
+      "link": "https://imxiaolong.com"
     },
     {
       "name": "GitHub",
@@ -41,7 +41,7 @@
   ],
   "brief": {
     "title": "About Me",
-    "meta": "Written by a weird guy named sherlonWang",
+    "meta": "Written by a weird guy named xiaolong",
     "content": " 一个喜欢折腾、懂点技术的互联网人、独立开发者、持续学习者。\n 喜欢开源，熟悉全栈开发模式，致力于用技术提高工作效率。"
   }
 }

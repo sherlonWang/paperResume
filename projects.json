@@ -3,49 +3,25 @@
     {
       "title": "LogoDiy",
       "subtitle": "一个简单的在线Logo制作工具",
-      "img": "images/index.png",
+      "img": "https://cdn.jsdelivr.net/gh/sherlonWang/imgbed/picgo20200807142204.png",
       "name1": "在线预览",
-      "href1": "https://www.logodiy.online/",
+      "href1": "https://logodiy.imxiaolong.com/",
       "name2": "GitHub",
       "href2": "https://github.com/sherlonWang/logodiy",
       "color": "success",
-      "percent": "95",
-      "state": "待完善"
+      "percent": "100",
+      "state": "已完成"
     },
     {
-      "title": "LogoDiy",
-      "subtitle": "一个简单的在线Logo制作工具",
-      "img": "images/0.png",
+      "title": "GifPlayer",
+      "subtitle": "控制gif动图暂停与播放",
+      "img": "https://cdn.jsdelivr.net/gh/sherlonWang/imgbed/picgo20200807145952.png",
       "name1": "在线预览",
-      "href1": "https://www.logodiy.online/",
+      "href1": "https://github.com/sherlonWang/gifplayer",
       "name2": "GitHub",
-      "href2": "https://github.com/sherlonWang/logodiy",
+      "href2": "https://github.com/sherlonWang/gifplayer",
       "color": "warning",
-      "percent": "60",
-      "state": "60%"
-    },
-    {
-      "title": "LogoDiy",
-      "subtitle": "一个简单的在线Logo制作工具",
-      "img": "images/1.png",
-      "name1": "在线预览",
-      "href1": "https://www.logodiy.online/",
-      "name2": "GitHub",
-      "href2": "https://github.com/sherlonWang/logodiy",
-      "color": "secondary",
-      "percent": "95",
-      "state": "待完善"
-    },
-    {
-      "title": "LogoDiy",
-      "subtitle": "一个简单的在线Logo制作工具",
-      "img": "images/1.png",
-      "name1": "在线预览",
-      "href1": "https://www.logodiy.online/",
-      "name2": "GitHub",
-      "href2": "https://github.com/sherlonWang/logodiy",
-      "color": "secondary",
-      "percent": "95",
+      "percent": "90",
       "state": "待完善"
     }
   ]
